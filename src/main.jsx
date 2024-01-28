@@ -7,6 +7,7 @@ import Home from './Components/Home.jsx'
 import About from './Components/About.jsx'
 import Tools from './Components/Tools.jsx'
 import Login from './Components/Login.jsx'
+import Categories from './Components/Categories.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
       path : "login",
       element : <Login/>
+    },
+    {
+      path : "categories",
+      element :<Categories/>
     }
   ]
   }
