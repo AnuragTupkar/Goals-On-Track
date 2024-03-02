@@ -23,16 +23,21 @@ function Header(){
                         ${isActive ? "text-red-700 underline" :" "}
                           `}>Tools</NavLink>
                       </li>
-                      
+                      <li>
+                        <NavLink to="/taskstatus" className={({isActive})=>`
+                        ${isActive ? "text-red-700 underline" :" "}
+                          `}>Status</NavLink>
+                      </li>
                    
                     </ul>
                     <ul className='flex gap-5 justify-center items-center ml-10 font-bold '>
                     <li>
                         <NavLink to="/login" className={({isActive})=>`
                         ${isActive ? "text-red-700 underline" :" "} ml-[52rem]
-                          `}><button className="bg-[#224867] rounded-lg p-1 px-5 items-end uppercase text-white font-normal">Login</button></NavLink>
+                          `}><button className='text-[#224867] hover:text-white border border-[#224867] hover:bg-[#224867] focus:ring-4 focus:outline-none focus:ring-[#224867] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-[#224867] dark:text-[#224867] dark:hover:text-white dark:hover:bg-[#224867] dark:focus:ring-[#224867]'>Login</button></NavLink>
                       </li>
                     </ul>
+                    
           </div>
     
       </>

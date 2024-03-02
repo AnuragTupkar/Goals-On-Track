@@ -1,11 +1,15 @@
 import React from 'react'
+import { FaLinkedin, FaGithub,FaInstagram, FaTwitter   } from "react-icons/fa" ;
+import {MdOutlineMailOutline } from "react-icons/md"
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
 
     return (
         <>
-    
-            <div className="rounded-3xl mt-4 relative h-[350px] w-[250px] ">
+    <div> 
+        
+            <div className="rounded-3xlmt-4 relative  h-[350px] w-[250px] ">
                 <img
                     src={props.image}
                     
@@ -17,10 +21,16 @@ const Card = (props) => {
                     <p className="mt-2 text-sm text-gray-300">
                        
                     </p>
-                    <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white">
-                    
+                    <button className="mt-2 inline-flex  cursor-pointer gap-4  items-center text-sm font-semibold text-white">
+                    <a href={props.linkedin} target="_blank" rel="noopener noreferrer"> <FaLinkedin /> </a>
+                    <a href={props.github} target="_blank" rel="noopener noreferrer"><FaGithub  /></a>
+                    <a href={props.email} target="_blank" rel="noopener noreferrer"><MdOutlineMailOutline/></a>
+                    <a href={props.insta} target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                    <a href={props.twitter} target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
                     </button>
                 </div>
+                
+            </div>
             </div>
         </>
     )
