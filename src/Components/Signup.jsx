@@ -1,47 +1,99 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./styles.module.css";
 
+const Signup = () => {
+	const [data, setData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: "",
+	});
+	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
-const SignUp = () => {
-  return (
-    <>
-      <div className="bg-[#FFDEDE] flex justify-center items-center h-screen">
-        <div className="w-1/2 h-screen hidden lg:block">
-          <img src="https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png" alt="Placeholder Image" className="object-cover w-full h-6xl mt-16" />
-        </div>
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
-        <div className="lg:p-36 md:p-52 sm:p-20 p-8 w-full lg:w-1/2">
-          <h1 className="text-2xl font-semibold mb-4">Sign Up</h1>
-          <form>
-            <div className="mb-4">
-              <label htmlFor="username" className="block text-gray-600">Username</label>
-              <input type="text" id="username" name="username" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
-            </div>
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:8080/api/users";
+			const { data: res } = await axios.post(url, data);
+			navigate("/login");
+			console.log(res.message);
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-600">Email</label>
-              <input type="email" id="email" name="email" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-gray-600">Password</label>
-              <input type="password" id="password" name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
-            </div>
-
-            <div className="mb-6 text-blue-500">
-              <Link to="/forgot-password" className="hover:underline">Forgot Password?</Link>
-            </div>
-
-            <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Sign Up</button>
-          </form>
-
-          <div className="mt-6 text-blue-500 text-center">
-            <Link to="/login" className="hover:underline">Already have an account? Login</Link>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+	return (
+		<div className={styles.signup_container}>
+			<div className={styles.signup_form_container}>
+				<div className={styles.left}>
+					<h1>Welcome Back</h1>
+					<Link to="/login">
+						<button type="button" className={styles.white_btn}>
+							Sing in
+						</button>
+					</Link>
+				</div>
+				<div className={styles.right}>
+					<form className={styles.form_container} onSubmit={handleSubmit}>
+						<h1>Create Account</h1>
+						<input
+							type="text"
+							placeholder="First Name"
+							name="firstName"
+							onChange={handleChange}
+							value={data.firstName}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="text"
+							placeholder="Last Name"
+							name="lastName"
+							onChange={handleChange}
+							value={data.lastName}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							className={styles.input}
+						/>
+						{error && <div className={styles.error_msg}>{error}</div>}
+						<button type="submit" className={styles.green_btn}>
+							Sing Up
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 };
 
-export default SignUp;
+export default Signup;

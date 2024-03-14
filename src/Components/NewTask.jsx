@@ -39,7 +39,7 @@ const NewTask = () => {
   
   return (
     <> 
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    
     <div className="bg-white p-8 rounded shadow-md w-96">
       <h1 className="text-2xl font-bold mb-4">Todo List</h1>
       <div className="flex mb-4">
@@ -84,7 +84,7 @@ const NewTask = () => {
         ))}
       </ul>
     </div>
-  </div>
+
   
     
     </>

@@ -13,7 +13,7 @@ const Card = (props) => {
                 <img
                     src={props.image}
                     
-                    className="z-0 h-18 rounded-md bg-black  object-cover"
+                    className="z-0 h-18 rounded-md bg-black  object-cover  h-[350px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-left">

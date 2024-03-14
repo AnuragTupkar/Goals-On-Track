@@ -4,14 +4,9 @@ import NewTask from './NewTask';
 import Stopwatch from './Stopwatch';
 import Resource from './Resource';
 
-const Study = (props) => {
+const Routine = (props) => {
   const [inputValue, setInputValue] = useState('');
-  const [routines, setRoutines] = useState([
-    { name: 'Complete Assignment', completed: false },
-    { name: 'Work on Major Project', completed: false },
-    { name: 'Prepare for Test', completed: false },
-    { name: 'Practice Java', completed: false }
-  ]);
+  const [routines, setRoutines] = useState([]);
   const [selectedTool, setSelectedTool] = useState(null);
   const [originalView, setOriginalView] = useState(true);
 
@@ -51,7 +46,7 @@ const Study = (props) => {
   return (
     <div className='flex'>
       <div className='bg-blue-900 w-3/4 h-[39.9rem] p-8'>
-        <h1 className='text-white text-3xl font-semibold mb-8'>Study Routine</h1>
+        <h1 className='text-white text-3xl font-semibold mb-8'>Routine</h1>
         <div>
           {routines.map((routine, index) => (
             <div key={index} className={`flex items-center justify-between mb-4 ${routine.completed ? 'line-through opacity-50' : ''}`}>
@@ -92,7 +87,7 @@ const Study = (props) => {
         )}
         {selectedTool && (
           <>
-           <div className='m-12'>
+           <div className='my-8'>
             {selectedTool === 'Notes' && <Notes />}
             {selectedTool === 'NewTask' && <NewTask />}
             {selectedTool === 'Resource' && <Resource />}
@@ -107,4 +102,4 @@ const Study = (props) => {
   );
 };
 
-export default Study;
+export default Routine;

@@ -11,14 +11,17 @@ const Tools = () => {
                <h1>To-do</h1>
             </div>
           </Link>
-          <Link to="/custom">
+          <Link to="/notes">
           <div className=' h-[15rem] w-[15rem] bg-[#26253B] rounded-md text-white flex justify-center text-center m-20 items-center'>
                <h1>Note Taking</h1>
             </div>
             </Link>
+            <Link to="/stopwatch">
             <div className=' h-[15rem] w-[15rem] bg-[#26253B] rounded-md text-white flex justify-center text-center m-20 items-center'>
                <h1>Timer</h1>
             </div>
+            </Link>
+            
       </div>
     </>
   )

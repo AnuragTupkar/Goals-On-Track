@@ -30,7 +30,7 @@ function Header(){
                       </li>
                    
                     </ul>
-                    <ul className='flex gap-5 justify-center items-center ml-10 font-bold '>
+                    <ul className='flex gap-5 justify-center items-center ml-10 font-bold  '>
                     <li>
                         <NavLink to="/login" className={({isActive})=>`
                         ${isActive ? "text-red-700 underline" :" "} ml-[52rem]

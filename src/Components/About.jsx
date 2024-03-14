@@ -1,10 +1,14 @@
 import React from 'react'
 import Card from './Card'
 import Anurag from '../assets/Anurag.jpg'
-import Bramha from '../assets/Bramha.jpeg'
+import Bramha from '../assets/Bramha.jpg'
 import Janhavi from '../assets/Janhavi.png'
 import Dhanshree from '../assets/Dhanshree.png'
+
+
 const About = () => {
+ 
+  
   return (
     <>
     <h1 className='ml-20 font-bold text-4xl my-4 underline mt-20 mb-20'>ABOUT US</h1>
@@ -18,7 +22,7 @@ const About = () => {
     </div>
      <h1 className=' text-black p-4 rounded-xl text-4xl uppercase font-bold  ml-20 underline mb-28'>Our Team</h1>
       <div className='flex flex-wrap gap-24 justify-center mb-36'>
-        <Card linkedin="https://www.linkedin.com/in/anurag-tupkar-840734238/" insta="https://www.instagram.com/anurag__tupkar/" twitter= "https://twitter.com/Anurag_Tupkar" github="https://github.com/AnuragTupkar"  email="mailto:anuragtupkar168@gmail.com" image= {Anurag} memberName = "Anurag Tupkar" />
+        <Card className="card" linkedin="https://www.linkedin.com/in/anurag-tupkar-840734238/" insta="https://www.instagram.com/anurag__tupkar/" twitter= "https://twitter.com/Anurag_Tupkar" github="https://github.com/AnuragTupkar"  email="mailto:anuragtupkar168@gmail.com" image= {Anurag} memberName = "Anurag Tupkar" />
         <Card linkedin="" insta="" twitter= "" github=""  email=""  image={Janhavi} memberName = "Janhavi Maheta" />
         <Card linkedin="" insta=" " twitter= "" github=""  email=""  className='h-[350px]' image={Bramha} memberName = "Bramhanad Tambile" />
         <Card linkedin="" insta=" " twitter= "" github=""  email=""  image={Dhanshree} memberName = "Dhanshree Walunj" />

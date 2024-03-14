@@ -4,13 +4,14 @@ import NewTask from './NewTask';
 import Stopwatch from './Stopwatch';
 import Resource from './Resource';
 
-const Study = (props) => {
+const Project = (props) => {
   const [inputValue, setInputValue] = useState('');
   const [routines, setRoutines] = useState([
-    { name: 'Complete Assignment', completed: false },
-    { name: 'Work on Major Project', completed: false },
-    { name: 'Prepare for Test', completed: false },
-    { name: 'Practice Java', completed: false }
+    { name: 'Make Frontend', completed: false },
+    { name: 'Make Backend', completed: false },
+    { name: 'Create Blackbook', completed: false },
+    { name: 'Create Synopsis', completed: false },
+    { name: 'Submit The Project', completed: false }
   ]);
   const [selectedTool, setSelectedTool] = useState(null);
   const [originalView, setOriginalView] = useState(true);
@@ -51,12 +52,15 @@ const Study = (props) => {
   return (
     <div className='flex'>
       <div className='bg-blue-900 w-3/4 h-[39.9rem] p-8'>
-        <h1 className='text-white text-3xl font-semibold mb-8'>Study Routine</h1>
+        <h1 className='text-white text-3xl font-semibold mb-8'>Project Routine</h1>
         <div>
+       
           {routines.map((routine, index) => (
             <div key={index} className={`flex items-center justify-between mb-4 ${routine.completed ? 'line-through opacity-50' : ''}`}>
+              
               <h1 className='text-white text-2xl'>{routine.name}</h1>
               <div className="flex items-center">
+                
                 <input
                   type='checkbox'
                   checked={routine.completed}
@@ -107,4 +111,4 @@ const Study = (props) => {
   );
 };
 
-export default Study;
+export default Project;

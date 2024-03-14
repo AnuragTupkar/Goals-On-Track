@@ -1,52 +1,89 @@
-// TaskStatus.js
-
 import React, { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const TaskStatus = () => {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: 'Task 1', status: 'to-do' },
-    { id: 2, text: 'Task 2', status: 'doing' },
-    { id: 3, text: 'Task 3', status: 'done' }
+const KanbanBoard = () => {
+  const [lists, setLists] = useState([
+    {
+      id: 'todo',
+      title: 'To Do',
+      cards: [{ id: '1', content: 'Task 1' }, { id: '2', content: 'Task 2' }],
+    },
+    {
+      id: 'inProgress',
+      title: 'In Progress',
+      cards: [],
+    },
+    {
+      id: 'done',
+      title: 'Done',
+      cards: [],
+    },
   ]);
 
-  const moveTask = (id, newStatus) => {
-    const updatedTasks = tasks.map(task => {
-      if (task.id === id) {
-        return { ...task, status: newStatus };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+  const onDragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+
+    if (!destination) return;
+
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) {
+      return;
+    }
+
+    const sourceListIndex = parseInt(source.droppableId);
+    const destinationListIndex = parseInt(destination.droppableId);
+    const sourceList = lists.find((list, index) => index === sourceListIndex);
+    const destinationList = lists.find(
+      (list, index) => index === destinationListIndex
+    );
+    const draggedCardIndex = source.index;
+    const draggedCard = sourceList.cards[draggedCardIndex];
+
+    sourceList.cards.splice(draggedCardIndex, 1);
+    destinationList.cards.splice(destination.index, 0, draggedCard);
+
+    setLists([...lists]);
   };
 
   return (
-    <div className="flex justify-center gap-8 m-20 text-center uppercase h-[33rem]">
-      <div className="w-1/3  bg-blue-400 p-4 rounded-md ">
-        <h2 className="text-xl font-semibold mb-4 ">To Do</h2>
-        {tasks.filter(task => task.status === 'to-do').map(task => (
-          <div key={task.id} className="bg-gray-200 rounded-md p-4 mb-4" draggable onDragStart={() => moveTask(task.id, 'to-do')}>
-            {task.text}
-          </div>
-        ))}
-      </div> 
-      <div className="w-1/3  bg-red-400 rounded-md p-4">
-        <h2 className="text-xl font-semibold mb-4  ">Doing</h2>
-        {tasks.filter(task => task.status === 'doing').map(task => (
-          <div key={task.id} className="bg-gray-200 rounded-md p-4 mb-4" draggable onDragStart={() => moveTask(task.id, 'doing')}>
-            {task.text}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="flex justify-center mt-8 space-x-8">
+        {lists.map((list, listIndex) => (
+          <div key={list.id} className="p-4 bg-gray-200 rounded">
+            <h3 className="text-lg font-semibold mb-2">{list.title}</h3>
+            <Droppable droppableId={listIndex.toString()}>
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className="bg-gray-100 rounded p-2"
+                  style={{ minHeight: '100px' }}
+                >
+                  {list.cards.map((card, index) => (
+                    <Draggable key={card.id} draggableId={card.id} index={index}>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="bg-white p-2 rounded shadow mb-2"
+                        >
+                          {card.content}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
           </div>
         ))}
       </div>
-      <div className="w-1/3  bg-green-400 p-4 rounded-md">
-        <h2 className="text-xl font-semibold mb-4 ">Done</h2>
-        {tasks.filter(task => task.status === 'done').map(task => (
-          <div key={task.id} className="bg-gray-200 rounded-md p-4 mb-4" draggable onDragStart={() => moveTask(task.id, 'done')}>
-            {task.text}
-          </div>
-        ))}
-      </div>
-    </div>
+    </DragDropContext>
   );
 };
 
-export default TaskStatus;
+export default KanbanBoard;
